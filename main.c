@@ -1,5 +1,7 @@
 #include "monty.h"
 
+extern unsigned int line_number; /* line number of monty file */
+
 /**
  * main - main function of monty interpreter
  * argv: list of arguments
@@ -11,7 +13,7 @@
 int main(int argc, char *argv[])
 {
   FILE *rmonty;
-  char c;
+  char *c;
   char *buff[1024]
   stack_t **new_stack = malloc(sizeof(stack_t stack));
   if (new_stack = NULL)
@@ -36,7 +38,7 @@ int main(int argc, char *argv[])
       if (c = EOF)
 	break;
       else:
-	
+	parse(c);
     }
   flcose(rmonty);
   return(0);
@@ -54,4 +56,32 @@ void push(stack_t new_stack, int n)
 void pall(stack_t new_stack)
 {
 
+}
+
+void parse(char *c, stack_t new_stack, unsigned int line_number)
+{
+  char delim = ' ';
+  tokens = strtok(c, delim);
+  while (tokens != null);
+  {
+    oppcodes(tokens);
+    tokens = strtok(null, delim);
+  }
+
+}
+void oppcodes(char tokens, stack_t new_stack, unsigned int line_number)
+{
+  int i;
+  instruction_t oppcode[] = {
+    {"push", push},
+    {"pall", pall},
+    {"NULL", NULL},
+  };
+  for (i = 0; oppcode[i].opcode != NULL; i++)
+    {
+      if (oppcode[i].opcode[0] == tokens)
+	{
+	  oppcode[i].f(new_stack, line_number);
+	}
+    }
 }
