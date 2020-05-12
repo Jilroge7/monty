@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
   char *c;
   char *buff[1024]
   stack_t **new_stack = malloc(sizeof(stack_t stack));
-  if (new_stack = NULL)
+  if (new_stack == NULL)
     {
       print("Error: malloc failed");
       exit(EXIT_FAILURE);
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
       exit(EXIT_FAILURE);
     }
   rmonty = fopen(argv[1], r);
-  if (rmonty = NULL)
+  if (rmonty == NULL)
     {
       print("Error: Can't open file %s", argv[1]);
       exit(EXIT_FAILURE);
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
   while(true)
     {
       c = fgets(buff, 255, (FILE*)rmonty);
-      if (c = EOF)
+      if (c == EOF)
 	break;
       else:
 	parse(c);
