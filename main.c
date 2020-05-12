@@ -44,13 +44,17 @@ int main(int argc, char *argv[])
   return(0);
 }
 
-void push(stack_t new_stack, int n)
+void push(stack_t *new_stack, int n)
 {
-  stack_t *push = malloc(sizeof(stack_t stack));
-  push->n = n;
-  push->prev = NULL;
-  push->next = *new_stack;
-  *new_stack->prev = push;
+	stack_t *push = malloc(sizeof(stack_t stack));
+	if (push == NULL)
+		return (NULL);
+	push->n = n;
+	push->prev = NULL;
+	push->next = *new_stack;
+	if (new_stack != NULL)
+		*new_stack->prev = push;
+	new_stack = push;
 }
 
 void pall(stack_t new_stack)
