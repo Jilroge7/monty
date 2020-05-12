@@ -37,5 +37,5 @@ typedef struct instruction_s
 
 
 /* PROTOTYPES */
-
+void pall_op(stack_t *stack_head);
 #endif /* MONTY_H */
