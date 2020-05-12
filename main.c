@@ -79,6 +79,11 @@ void oppcodes(char tokens, stack_t new_stack, unsigned int line_number)
   instruction_t oppcode[] = {
     {"push", push},
     {"pall", pall},
+    {"pint", pint}.
+    {"pop", pop},
+    {"swap", swap},
+    {"add", add},
+    {"nop", nop}
     {"NULL", NULL},
   };
   for (i = 0; oppcode[i].opcode != NULL; i++)
