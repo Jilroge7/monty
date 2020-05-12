@@ -37,5 +37,19 @@ typedef struct instruction_s
 
 
 /* PROTOTYPES */
+void pull();
+
+void pall();
+
+void pint();
+
+void pop();
+
+void swap();
+
+void add();
+
+void nop();
+
 
 #endif /* MONTY_H */
