@@ -4,7 +4,7 @@
  *
  */
 
-void pop(stack_t **new_stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
   if (*stack != NULL)
     {
@@ -13,7 +13,7 @@ void pop(stack_t **new_stack, unsigned int line_number)
     }
 }
 
-void swap(stack_t **new_stack, unsigned int line_number)
+void swap(stack_t **stack, unsigned int line_number)
 {
   int temp = (*stack)->n;
   (*stack)->n = (*stack)->next->n;

@@ -44,13 +44,13 @@ int main(int argc, char *argv[])
   return(0);
 }
 
-void push(stack_t new_stack, int n)
+void push(stack_t stack, int n, unsigned int line_number)
 {
   stack_t *push = malloc(sizeof(stack_t stack));
   push->n = n;
   push->prev = NULL;
-  push->next = *new_stack;
-  *new_stack->prev = push;
+  push->next = *stack;
+  (*stack)->prev = push;
 }
 
 void pall(stack_t new_stack)
@@ -75,6 +75,11 @@ void oppcodes(char tokens, stack_t new_stack, unsigned int line_number)
   instruction_t oppcode[] = {
     {"push", push},
     {"pall", pall},
+    {"pint", pint}.
+    {"pop", pop},
+    {"swap", swap},
+    {"add", add},
+    {"nop", nop}
     {"NULL", NULL},
   };
   for (i = 0; oppcode[i].opcode != NULL; i++)

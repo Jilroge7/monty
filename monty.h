@@ -37,19 +37,19 @@ typedef struct instruction_s
 
 
 /* PROTOTYPES */
-void pull();
+void pull(stack_t **stack, int n, unsigned int line_number);
 
-void pall();
+void pall(stack_t **stack, unsigned int line_number);
 
-void pint();
+void pint(stack_t **stack, unsigned int line_number);
 
-void pop();
+void pop(stack_t **stack, unsigned int line_number);
 
-void swap();
+void swap(stack_t **stack, unsigned int line_number);
 
-void add();
+void add(stack_t **stack, unsigned int line_number);
 
-void nop();
+void nop(stack_t **stack, unsigned int line_number);
 
 
 #endif /* MONTY_H */
