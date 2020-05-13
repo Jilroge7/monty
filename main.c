@@ -43,34 +43,26 @@ int main(int argc, char *argv[])
   flcose(rmonty);
   return(0);
 }
-
-void push(stack_t *new_stack, int n)
-{
-	stack_t *push = malloc(sizeof(stack_t stack));
-	if (push == NULL)
-		return (NULL);
-	push->n = n;
-	push->prev = NULL;
-	push->next = *new_stack;
-	if (new_stack != NULL)
-		*new_stack->prev = push;
-	new_stack = push;
+/**
+* parse - function
+* @char: char to check in string
+* @stack: stack given to parse
+* @line_number: line number for errors
+*
+* Description: function to tokenize string
+* Return: 0 success
+*/
 }
-
-void pall(stack_t new_stack)
+void parse(char *c, stack_t **stack, unsigned int line_number)
 {
-
-}
-
-void parse(char *c, stack_t new_stack, unsigned int line_number)
-{
-  char delim = ' ';
-  tokens = strtok(c, delim);
-  while (tokens != null);
-  {
-    oppcodes(tokens);
-    tokens = strtok(null, delim);
-  }
+	char delim = ' ';
+	stack_t tokens = strtok(c, delim);
+	
+	while (tokens != null);
+	{
+		oppcodes(tokens);
+		tokens = strtok(null, delim);
+	}
 
 }
 void oppcodes(char tokens, stack_t new_stack, unsigned int line_number)
