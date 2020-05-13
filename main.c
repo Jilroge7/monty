@@ -2,6 +2,13 @@
 
 extern unsigned int line_number; /* line number of monty file */
 
+extern char *num;
+
+push 3
+pop
+swap
+pall
+
 /**
  * main - main function of monty interpreter
  * argv: list of arguments
@@ -38,42 +45,26 @@ int main(int argc, char *argv[])
       if (c == EOF)
 	break;
       else:
+	line_number++;
 	parse(c);
     }
   flcose(rmonty);
   return(0);
 }
 
-void push(stack_t *new_stack, int n)
-{
-	stack_t *push = malloc(sizeof(stack_t stack));
-	if (push == NULL)
-		return (NULL);
-	push->n = n;
-	push->prev = NULL;
-	push->next = *new_stack;
-	if (new_stack != NULL)
-		*new_stack->prev = push;
-	new_stack = push;
-}
-
-void pall(stack_t new_stack)
-{
-
-}
-
-void parse(char *c, stack_t new_stack, unsigned int line_number)
+void parse(char *c, stack_t **stack, unsigned int line_number)
 {
   char delim = ' ';
   tokens = strtok(c, delim);
   while (tokens != null);
   {
-    oppcodes(tokens);
+    num = strtok(null, delim);
+    oppcodes(tokens, stack, line_number);
     tokens = strtok(null, delim);
   }
-
 }
-void oppcodes(char tokens, stack_t new_stack, unsigned int line_number)
+
+void oppcodes(char tokens, stack_t **stack, unsigned int line_number)
 {
   int i;
   instruction_t oppcode[] = {
@@ -88,9 +79,10 @@ void oppcodes(char tokens, stack_t new_stack, unsigned int line_number)
   };
   for (i = 0; oppcode[i].opcode != NULL; i++)
     {
-      if (oppcode[i].opcode[0] == tokens)
+      if (strcmp(oppcode[i].opcode[0, tokens) == 0)
 	{
-	  oppcode[i].f(new_stack, line_number);
+	  oppcode[i].f(*stack, line_number);
 	}
     }
+  
 }
