@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
 * add_op - opcode function
 * @stack: stack given to add
@@ -7,22 +8,22 @@
 * Description: opcode function to add top two values
 * Return: 0 success
 */
-void add_op(stack_t **stack, __attribute__((unused))unsigned int line_number)
+
+void add(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int val;
 
 	if (*stack == NULL)
-		return (NULL);
+		return;
 
-	while (temp != NULL)
-		temp = temp->next;
 	val = temp->n;
-	temp = temp->prev;
-	temp = temp->n + val;
-	temp->next = NULL;
-	free(temp);
+	temp = temp->next;
+	temp->n = temp->n + val;
+	free(temp->prev);
+	temp->prev = NULL;
 }
+
 /**
 * push - opcode function
 * @stack: stack given to add to
@@ -32,16 +33,19 @@ void add_op(stack_t **stack, __attribute__((unused))unsigned int line_number)
 * Description: function to add node to top of stack
 * Return: 0 success
 */
-void push(stack_t **stack, unsigned int line_number, int n)
-{
-	stack_t *push = malloc(sizeof(stack_t));
 
-	if (push == NULL)
-		return (NULL);
-	push->n = n;
+void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
+{
+  int i;
+  stack_t *push = malloc(sizeof(stack_t));
+  
+  if (push == NULL)
+    return;
+  i = atoi(num);
+  push->n = i;
 	push->prev = NULL;
-	push->next = *new_stack;
-	if (new_stack != NULL)
-		*new_stack->prev = push;
-	new_stack = push;
+	push->next = *stack;
+	if (stack != NULL)
+	  (*stack)->prev = push;
+	*stack = push;
 }

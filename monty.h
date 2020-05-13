@@ -3,12 +3,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
 #include <unistd.h>
-#include <fcntl.h>
-#include <signal.h>
+
+/* GLOBAL VARIABLES */
+
+extern unsigned int line_number; /* line count of monty file */
+extern char *num; /* second argument for opcodes that require it */
+
 /* DATA STRUCTURES */
 
 /**
@@ -42,12 +43,15 @@ typedef struct instruction_s
 
 /* PROTOTYPES */
 void push(stack_t **stack, unsigned int line_number);
-void pull(stack_t **stack, int n, unsigned int line_number);
+void pull(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void parse(char *c, stack_t **stack, unsigned int line_number);
+void opcodes(char *token, stack_t **stack, unsigned int line_number);
+
 
 #endif /* MONTY_H */

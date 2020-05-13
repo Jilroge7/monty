@@ -1,14 +1,7 @@
 #include "monty.h"
 
-extern unsigned int line_number; /* line number of monty file */
-
-extern char *num;
-
-push 3
-pop
-swap
-pall
-
+char *num = NULL;
+unsigned int line_number = 0;
 /**
  * main - main function of monty interpreter
  * argv: list of arguments
@@ -21,78 +14,106 @@ int main(int argc, char *argv[])
 {
   FILE *rmonty;
   char *c;
-  char *buff[1024]
-  stack_t **new_stack = malloc(sizeof(stack_t stack));
-  if (new_stack == NULL)
+  char buff[1024];
+  stack_t **stack = malloc(sizeof(stack_t));
+  if (stack == NULL)
     {
-      print("Error: malloc failed");
+      printf("Error: malloc failed");
       exit(EXIT_FAILURE);
     }
   if (argc < 2 || argc > 2)
     {
-      print("USAGE: monty file");
+      printf("USAGE: monty file");
       exit(EXIT_FAILURE);
     }
-  rmonty = fopen(argv[1], r);
+  rmonty = fopen(argv[1], "r");
   if (rmonty == NULL)
     {
-      print("Error: Can't open file %s", argv[1]);
+      printf("Error: Can't open file %s", argv[1]);
       exit(EXIT_FAILURE);
     }
-  while(true)
+  while (1)
     {
       c = fgets(buff, 255, (FILE*)rmonty);
-      if (c == EOF)
+      if (c == NULL)
 	break;
-      else:
-	line_number++;
-	parse(c);
+      else;
+      line_number++;
+      parse(c, stack, line_number);
     }
-  flcose(rmonty);
-  return(0);
+  fclose(rmonty);
+  return (0);
 }
+
+/**
+ * parse - function
+ * @c: char to check in string 
+ * @stack: stack given to parse
+ * @line_number: line number for errors
+ *
+ * Description: function to tokenize string
+ * Return: 0 success 
+ */
 
 void parse(char *c, stack_t **stack, unsigned int line_number)
 {
-  char delim = ' ';
+  int i;
+  char *delim = " ";
+  char *tokens;
   tokens = strtok(c, delim);
-  while (tokens != null);
+  for(i = 0; tokens[i] != NULL; i++ );
   {
-    num = strtok(null, delim);
-    oppcodes(tokens, stack, line_number);
-    tokens = strtok(null, delim);
+    num = strtok(NULL, delim);
+    opcodes(tokens, stack, line_number);
+    tokens = strtok(NULL, delim);
   }
 }
+
 /**
-* parse - function
-* @char: char to check in string
-* @stack: stack given to parse
-* @line_number: line number for errors
-*
-* Description: function to tokenize string
-* Return: 0 success
-*/
+ * oppcodes - function
+ * @token: token to check against oppcode
+ * @stack: stack given to oppcodes
+ * @line_number: line number for errors
+ *
+ * Description: function to check tokens against oppcodes
+ * Return: 0 success
+ */
 
-
-void oppcodes(char tokens, stack_t **stack, unsigned int line_number)
+void opcodes(char *tokens, stack_t **stack, unsigned int line_number)
 {
   int i;
-  instruction_t oppcode[] = {
+  instruction_t opcode[] = {
     {"push", push},
     {"pall", pall},
-    {"pint", pint}.
+    {"pint", pint},
     {"pop", pop},
     {"swap", swap},
     {"add", add},
-    {"nop", nop}
+    {"nop", nop},
     {"NULL", NULL},
   };
-  for (i = 0; oppcode[i].opcode != NULL; i++)
+  for (i = 0; opcode[i].opcode != NULL; i++)
     {
-      if (strcmp(oppcode[i].opcode[0, tokens) == 0)
+      if (_strcmp(opcode[i].opcode[0], tokens) == 0)
 	{
-	  oppcode[i].f(*stack, line_number);
+	  opcode[i].f(stack, line_number);
 	}
     }
-  
+  printf("L%d: unknown instruction %s", line_number, tokens);
+  exit(EXIT_FAILURE);
+}
+
+int _strcmp(char *s1, char *s2)
+{
+  int c, r = 0;
+
+  for (c = 0; s1[c] != '\0' && s2[c] != '\0'; c++)
+    {
+      if (s1[c] != s2[c])
+	{
+	  r = (s1[c] - s2[c]);
+	  return (r);
+	}
+    }
+  return (r);
 }

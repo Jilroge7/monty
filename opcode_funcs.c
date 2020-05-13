@@ -6,7 +6,7 @@
 *
 * Return: void
 */
-void pop(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	if (*stack != NULL)
 	{
@@ -21,7 +21,7 @@ void pop(stack_t **stack, unsigned int line_number)
 *
 * Return: void
 */
-void swap(stack_t **stack, unsigned int line_number)
+void swap(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	int temp = (*stack)->n;
 	(*stack)->n = (*stack)->next->n;
@@ -63,6 +63,6 @@ void pint(stack_t **stack, __attribute__((unused))unsigned int line_number)
 * Description: opcode function to do nothing
 * Return: 0 success
 */
-void nop(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void nop(__attribute__((unused))stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 }
