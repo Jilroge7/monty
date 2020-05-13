@@ -63,6 +63,16 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
     tokens = strtok(null, delim);
   }
 }
+/**
+* parse - function
+* @char: char to check in string
+* @stack: stack given to parse
+* @line_number: line number for errors
+*
+* Description: function to tokenize string
+* Return: 0 success
+*/
+
 
 void oppcodes(char tokens, stack_t **stack, unsigned int line_number)
 {
