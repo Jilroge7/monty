@@ -38,14 +38,21 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
   int i;
   stack_t *push = malloc(sizeof(stack_t));
-  
   if (push == NULL)
-    return;
+    exit;
   i = atoi(num);
   push->n = i;
-	push->prev = NULL;
-	push->next = *stack;
-	if (stack != NULL)
-	  (*stack)->prev = push;
-	*stack = push;
+  if (*stack == NULL)
+    {
+      (*stack) = push;
+      (*stack)->next = NULL;
+      return;
+    }
+  else
+    {
+      (*stack)->prev = push;
+      push->next = (*stack);
+      (*stack) = push;
+    }
 }
+

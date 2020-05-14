@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
       c = fgets(buff, 255, (FILE*)rmonty);
       if (c == NULL)
 	break;
-      else;
       line_number++;
       parse(c, stack, line_number);
     }
@@ -60,29 +59,7 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
   int i;
   char *delim = " ";
   char *tokens;
-  tokens = strtok(c, delim);
-  for(i = 0; tokens[i] != NULL; i++ );
-  {
-    num = strtok(NULL, delim);
-    opcodes(tokens, stack, line_number);
-    tokens = strtok(NULL, delim);
-  }
-}
-
-/**
- * oppcodes - function
- * @token: token to check against oppcode
- * @stack: stack given to oppcodes
- * @line_number: line number for errors
- *
- * Description: function to check tokens against oppcodes
- * Return: 0 success
- */
-
-void opcodes(char *tokens, stack_t **stack, unsigned int line_number)
-{
-  int i;
-  instruction_t opcode[] = {
+  instruction_t code[] = {
     {"push", push},
     {"pall", pall},
     {"pint", pint},
@@ -92,15 +69,19 @@ void opcodes(char *tokens, stack_t **stack, unsigned int line_number)
     {"nop", nop},
     {"NULL", NULL},
   };
-  for (i = 0; opcode[i].opcode != NULL; i++)
+  tokens = strtok(c, delim);
+  num = strtok(NULL, delim);
+  for (i = 0; i < 8; i++)
     {
-      if (_strcmp(opcode[i].opcode[0], tokens) == 0)
+      if (_strcmp(code[i].opcode, tokens) == 0)
 	{
-	  opcode[i].f(stack, line_number);
+	  code[i].f(stack, line_number);
+	  return;
 	}
     }
   printf("L%d: unknown instruction %s", line_number, tokens);
   exit(EXIT_FAILURE);
+
 }
 
 int _strcmp(char *s1, char *s2)
