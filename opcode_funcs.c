@@ -9,21 +9,20 @@
 */
 void pop(stack_t **stack, unsigned int line_number)
 {
-  stack_t *pre;
-  if (*stack != NULL)
-    {
-      pre = (*stack);
-      *stack = (*stack)->next;
-      free(pre);
-    }
-  else
-    {
-      fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-      exit(EXIT_FAILURE);
-    }
+	stack_t *pre;
+
+	if (*stack != NULL)
+	{
+		pre = (*stack);
+		*stack = (*stack)->next;
+		free(pre);
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 }
-
-
 
 /**
 * swap - swap top two elements of stack
@@ -34,17 +33,17 @@ void pop(stack_t **stack, unsigned int line_number)
 */
 void swap(stack_t **stack, unsigned int line_number)
 {
-  if ((*stack)->prev == NULL && (*stack)->next == NULL)
-    {
-      fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-      exit(EXIT_FAILURE);
-    }
-  else
-    {
-      int temp = (*stack)->n;
-      (*stack)->n = (*stack)->next->n;
-      (*stack)->next->n = temp;
-    }
+	if ((*stack)->prev == NULL && (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		int temp = (*stack)->n;
+		(*stack)->n = (*stack)->next->n;
+		(*stack)->next->n = temp;
+	}
 }
 /**
 * pall - opcode function
@@ -56,14 +55,16 @@ void swap(stack_t **stack, unsigned int line_number)
 */
 void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
-  stack_t *tmp;
-  tmp = *stack;
-  while (tmp != NULL)
+	stack_t *tmp;
+
+	tmp = *stack;
+	while (tmp != NULL)
 	{
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
 }
+
 /**
 * pint - opcode function
 * @stack: stack given to print
