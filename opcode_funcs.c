@@ -10,7 +10,7 @@ void pop(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	if (*stack != NULL)
 	{
-		*stack = (*stack)->next;
+	  (*stack) = (*stack)->next;
 		(*stack)->prev = NULL;
 	}
 }
@@ -40,6 +40,8 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	while (*stack != NULL)
 	{
 		printf("%d\n", (*stack)->n);
+		if ((*stack)->next == NULL)
+		  return;
 		(*stack) = (*stack)->next;
 	}
 }
@@ -53,7 +55,12 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 */
 void pint(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
+  if ((*stack)->prev == NULL)
 	printf("%d\n", (*stack)->n);
+  else
+    while ((*stack)->prev != NULL)
+      (*stack) = (*stack)->prev;
+  printf("%d\n", (*stack)->n);
 }
 /**
 * nop - opcode function

@@ -18,18 +18,18 @@ int main(int argc, char *argv[])
   stack_t **stack = malloc(sizeof(stack_t));
   if (stack == NULL)
     {
-      printf("Error: malloc failed");
+      fprintf(stderr, "Error: malloc failed");
       exit(EXIT_FAILURE);
     }
   if (argc < 2 || argc > 2)
     {
-      printf("USAGE: monty file");
+      fprintf(stderr, "USAGE: monty file");
       exit(EXIT_FAILURE);
     }
   rmonty = fopen(argv[1], "r");
   if (rmonty == NULL)
     {
-      printf("Error: Can't open file %s", argv[1]);
+      fprintf(stderr, "Error: Can't open file %s", argv[1]);
       exit(EXIT_FAILURE);
     }
   while (1)
@@ -79,7 +79,7 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
 	  return;
 	}
     }
-  printf("L%d: unknown instruction %s", line_number, tokens);
+  fprintf(stderr, "L%d: unknown instruction %s", line_number, tokens);
   exit(EXIT_FAILURE);
 
 }
