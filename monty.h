@@ -50,6 +50,9 @@ void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_number);
+void _div(stack_t **stack, unsigned int line_number);
 void parse(char *c, stack_t **stack, unsigned int line_number);
 int _strcmp(char *s1, char *s2);
 

@@ -69,11 +69,14 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", sub},
+		{"div", _div},
+		{"mul", mul},
 		{"NULL", NULL}
 	};
 	tokens = strtok(c, delim);
 	num = strtok(NULL, delim);
-	for (i = 0; i < 8; i++)
+	for (i = 0; i < 11; i++)
 	{
 		if (_strcmp(code[i].opcode, tokens) == 0)
 		{
