@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
-* add_op - opcode function
+* add - opcode function
 * @stack: stack given to add
 * @line_number: line number for error
 *
@@ -9,14 +9,18 @@
 * Return: 0 success
 */
 
-void add(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int val;
 
 	if (*stack == NULL)
 		return;
-
+	if (temp->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	val = temp->n;
 	temp = temp->next;
 	temp->n = temp->n + val;
@@ -28,7 +32,6 @@ void add(stack_t **stack, __attribute__((unused))unsigned int line_number)
 * push - opcode function
 * @stack: stack given to add to
 * @line_number: line number for error
-* @n: data for new node
 *
 * Description: function to add node to top of stack
 * Return: 0 success
@@ -36,23 +39,24 @@ void add(stack_t **stack, __attribute__((unused))unsigned int line_number)
 
 void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
-  int i;
-  stack_t *push = malloc(sizeof(stack_t));
-  if (push == NULL)
-    exit;
-  i = atoi(num);
-  push->n = i;
-  if (*stack == NULL)
-    {
-      (*stack) = push;
-      (*stack)->next = NULL;
-      return;
-    }
-  else
-    {
-      (*stack)->prev = push;
-      push->next = (*stack);
-      (*stack) = push;
-    }
+	int i;
+	stack_t *push = malloc(sizeof(stack_t));
+
+	if (push == NULL)
+		exit(EXIT_FAILURE);
+	i = atoi(num);
+	push->n = i;
+	if (*stack == NULL)
+	{
+		(*stack) = push;
+		(*stack)->next = NULL;
+		return;
+	}
+	else
+	{
+		(*stack)->prev = push;
+		push->next = (*stack);
+		(*stack) = push;
+	}
 }
 
