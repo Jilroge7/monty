@@ -1,4 +1,5 @@
 #include "monty.h"
+#define UNUSED __attribute__((unused))
 /**
 * pop - pop out a stack
 * @stack: the stack to pop out of
@@ -18,7 +19,7 @@ void pop(stack_t **stack, unsigned int line_number)
       free(*stack);
       return;
     }
-  fprintf(stderr, "L%d: can't pop an empty stack", line_number);
+  fprintf(stderr, "L%d: can't pop an empty stack/n", line_number);
   exit(EXIT_FAILURE);
 }
 
@@ -49,7 +50,7 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	{
 		printf("%d\n", (*stack)->n);
 		if ((*stack)->next == NULL)
-		  return;
+			return;
 		(*stack) = (*stack)->next;
 	}
 }
@@ -63,17 +64,19 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 */
 void pint(stack_t **stack, unsigned int line_number)
 {
-  if (*stack == NULL)
-    {
-      fprintf(stderr, "L%d: can't pint, stack empty", line_number);
-      exit(EXIT_FAILURE);
-    }
-  if ((*stack)->prev == NULL)
-	printf("%d\n", (*stack)->n);
-  else
-    while ((*stack)->prev != NULL)
-      (*stack) = (*stack)->prev;
-  printf("%d\n", (*stack)->n);
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->prev == NULL)
+		printf("%d\n", (*stack)->n);
+	else
+	{
+		while ((*stack)->prev != NULL)
+			(*stack) = (*stack)->prev;
+		printf("%d\n", (*stack)->n);
+	}
 }
 /**
 * nop - opcode function
@@ -83,6 +86,6 @@ void pint(stack_t **stack, unsigned int line_number)
 * Description: opcode function to do nothing
 * Return: 0 success
 */
-void nop(__attribute__((unused))stack_t **stack, __attribute__((unused))unsigned int line_number)
+void nop(UNUSED stack_t **stack, UNUSED unsigned int line_number)
 {
 }
