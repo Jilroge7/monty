@@ -80,11 +80,12 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
 		{"div", _div},
 		{"mul", mul},
 		{"mod", mod},
+		{"#", comments},
 		{"NULL", NULL}
 	};
 	tokens = strtok(c, delim);
 	num = strtok(NULL, delim);
-	for (i = 0; i < 12; i++)
+	for (i = 0; i < 13; i++)
 	{
 		if (_strcmp(code[i].opcode, tokens) == 0)
 		{

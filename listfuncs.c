@@ -1,4 +1,5 @@
 #include "monty.h"
+#define UNUSED __attribute__((unused))
 
 /**
 * freelist - free a doubly linked list
@@ -53,4 +54,15 @@ void mod(stack_t **stack, unsigned int line_number)
 	free(*stack);
 	temp->prev = NULL;
 	*stack = temp;
+}
+/**
+* comments - function
+* @stack: stack given
+* @line_number: line_number for error
+*
+* Description: function to do nothing(comments)
+* Return: nothing
+*/
+void comments(UNUSED stack_t **stack, UNUSED unsigned int line_number)
+{
 }
