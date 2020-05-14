@@ -10,11 +10,12 @@
 void freelist(stack_t **stack)
 {
   stack_t *tmp;
-  while (stack != NULL)
+  while (*stack != NULL)
     {
       tmp = (*stack)->next;
-      free(stack);
+      free(*stack);
       *stack = tmp;
     }
+  free(*stack);
 }
 

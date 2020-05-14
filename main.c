@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	char *c;
 	char buff[1024];
 	unsigned int line_number = 0;
-	stack_t **stack = malloc(sizeof(stack_t));
+	stack_t **stack = malloc(sizeof(stack_t *));
 	if (stack == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -23,17 +23,21 @@ int main(int argc, char *argv[])
 	if (argc < 2 || argc > 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		if (*stack != NULL)
-		  freelist(stack);
+	        free(*stack);
 		exit(EXIT_FAILURE);
 	}
+	if (access(argv[1], R_OK) == -1)
+	  {
+	    fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+	    free(*stack);
+	    exit(EXIT_FAILURE);
+	  }
 	rmonty = fopen(argv[1], "r");
 	if (rmonty == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		if (*stack != NULL)
-		  freelist(stack);
-		exit(EXIT_FAILURE);
+          fprintf(stderr, "Error: malloc failed\n");
+	  free(*stack);
+	  exit(EXIT_FAILURE);
 	}
 	while (1)
 	{
@@ -45,6 +49,7 @@ int main(int argc, char *argv[])
 		line_number++;
 		parse(c, stack, line_number);
 	}
+	freelist(stack);
 	fclose(rmonty);
 	return (0);
 }
