@@ -6,14 +6,22 @@
 *
 * Return: void
 */
-void pop(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
-	if (*stack != NULL)
-	{
-	  (*stack) = (*stack)->next;
-		(*stack)->prev = NULL;
-	}
+  if (*stack != NULL && (*stack)->next != NULL)
+    {
+      (*stack) = (*stack)->next;
+      (*stack)->prev = NULL;
+    }
+  else if (*stack != NULL && (*stack)->next == NULL)
+    {
+      free(*stack);
+      return;
+    }
+  fprintf(stderr, "L%d: can't pop an empty stack", line_number);
+  exit(EXIT_FAILURE);
 }
+
 /**
 * swap - swap top two elements of stack
 * @stack: the stack to swap
@@ -53,8 +61,13 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 * Description: opcode function to print stack value on top
 * Return: 0 success
 */
-void pint(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number)
 {
+  if (*stack == NULL)
+    {
+      fprintf(stderr, "L%d: can't pint, stack empty", line_number);
+      exit(EXIT_FAILURE);
+    }
   if ((*stack)->prev == NULL)
 	printf("%d\n", (*stack)->n);
   else
