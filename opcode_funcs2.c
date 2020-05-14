@@ -19,13 +19,13 @@ void add(stack_t **stack, unsigned int line_number)
 	if (temp->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-		freelist(stack);
+		free(*stack);
 		exit(EXIT_FAILURE);
 	}
 	val = temp->n;
 	temp = temp->next;
 	temp->n = temp->n + val;
-	free(temp->prev);
+	free(*stack);
 	temp->prev = NULL;
 	*stack = temp;
 }
@@ -52,7 +52,7 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	  push->n = i;
 	if (*stack == NULL)
 	{
-		(*stack) = push;
+	  *stack = push;
 		(*stack)->next = NULL;
 		(*stack)->prev = NULL;
 	}
@@ -82,12 +82,13 @@ void sub(stack_t **stack, unsigned int line_number)
 	if (temp->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
+		free(*stack);
 		exit(EXIT_FAILURE);
 	}
 	val = temp->n;
 	temp = temp->next;
 	temp->n = temp->n - val;
-	free(temp->prev);
+	free(*stack);
 	temp->prev = NULL;
 	*stack = temp;
 }
@@ -120,7 +121,7 @@ void _div(stack_t **stack, unsigned int line_number)
 	}
 	temp = temp->next;
 	temp->n = val / temp->n;
-	free(temp->prev);
+	free(*stack);
 	temp->prev = NULL;
 	*stack = temp;
 }
@@ -147,7 +148,7 @@ void mul(stack_t **stack, unsigned int line_number)
 	val = temp->n;
 	temp = temp->next;
 	temp->n = val * temp->n;
-	free(temp->prev);
+	free(*stack);
 	temp->prev = NULL;
 	*stack = temp;
 }
