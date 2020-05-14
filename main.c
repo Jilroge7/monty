@@ -15,12 +15,12 @@ int main(int argc, char *argv[])
   FILE *rmonty;
   char *c;
   char buff[1024];
-  stack_t **stack = NULL;
-  /*  if (stack == NULL)
+  stack_t **stack = malloc(sizeof(stack_t));
+  if (stack == NULL)
     {
       printf("Error: malloc failed");
       exit(EXIT_FAILURE);
-      }*/
+    }
   if (argc < 2 || argc > 2)
     {
       printf("USAGE: monty file");
@@ -35,7 +35,6 @@ int main(int argc, char *argv[])
   while (1)
     {
       c = fgets(buff, 255, (FILE*)rmonty);
-      printf("\nfgets: %s\n", c);
       if (c == NULL)
 	break;
       line_number++;
@@ -70,59 +69,20 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
     {"nop", nop},
     {"NULL", NULL},
   };
-  printf("in parse\n");
   tokens = strtok(c, delim);
   num = strtok(NULL, delim);
-  printf("\n tokens %s\n num %s\n", tokens, num);
   for (i = 0; i < 8; i++)
     {
-      printf("in for\n");
-      if (_strcmp(code[i].opcode[0], tokens) == 0)
+      if (_strcmp(code[i].opcode, tokens) == 0)
 	{
-          printf("in the strcmp\n");
-          code[i].f(stack, line_number);
+	  code[i].f(stack, line_number);
+	  return;
 	}
     }
   printf("L%d: unknown instruction %s", line_number, tokens);
   exit(EXIT_FAILURE);
 
 }
-
-/**
- * oppcodes - function
- * @token: token to check against oppcode
- * @stack: stack given to oppcodes
- * @line_number: line number for errors
- *
- * Description: function to check tokens against oppcodes
- * Return: 0 success
- */
-
-/*void opcodes(char *tokens, stack_t **stack, unsigned int line_number)
-{
-  int i;
-  instruction_t opcode[] = {
-    {"push", push},
-    {"pall", pall},
-    {"pint", pint},
-    {"pop", pop},
-    {"swap", swap},
-    {"add", add},
-    {"nop", nop},
-    {"NULL", NULL},
-  };
-  printf("in opcodes\n");
-  for (i = 0; opcode[i].opcode != NULL; i++)
-    {
-      if (_strcmp(opcode[i].opcode[0], tokens) == 0)
-	{
-	  printf("in the strcmp\n");
-	  opcode[i].f(stack, line_number);
-	}
-    }
-  printf("L%d: unknown instruction %s", line_number, tokens);
-  exit(EXIT_FAILURE);
-  }*/
 
 int _strcmp(char *s1, char *s2)
 {
