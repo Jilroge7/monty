@@ -9,19 +9,21 @@
 */
 void pop(stack_t **stack, unsigned int line_number)
 {
-  if (*stack != NULL && (*stack)->next != NULL)
+  stack_t *pre;
+  if (*stack != NULL)
     {
-      (*stack) = (*stack)->next;
-      (*stack)->prev = NULL;
+      pre = (*stack);
+      *stack = (*stack)->next;
+      free(pre);
     }
-  else if (*stack != NULL && (*stack)->next == NULL)
+  else
     {
-      (*stack) = NULL;
-      return;
+      fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+      exit(EXIT_FAILURE);
     }
-  fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-  exit(EXIT_FAILURE);
 }
+
+
 
 /**
 * swap - swap top two elements of stack
@@ -54,14 +56,12 @@ void swap(stack_t **stack, unsigned int line_number)
 */
 void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
-  while (*stack != NULL)
+  stack_t *tmp;
+  tmp = *stack;
+  while (tmp != NULL)
 	{
-		printf("%d\n", (*stack)->n);
-		if ((*stack)->next == NULL && (*stack)->prev != NULL)
-		  {
-		    return;
-		  }
-		(*stack) = (*stack)->next;
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
 	}
 }
 /**
