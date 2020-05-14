@@ -19,6 +19,7 @@ void add(stack_t **stack, unsigned int line_number)
 	if (temp->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		freelist(stack);
 		exit(EXIT_FAILURE);
 	}
 	val = temp->n;
@@ -26,6 +27,7 @@ void add(stack_t **stack, unsigned int line_number)
 	temp->n = temp->n + val;
 	free(temp->prev);
 	temp->prev = NULL;
+	*stack = temp;
 }
 
 /**
@@ -41,16 +43,18 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	int i;
 	stack_t *push = malloc(sizeof(stack_t));
-
 	if (push == NULL)
+	  {
+	    fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
-	i = atoi(num);
-	push->n = i;
+	  }
+	  i = atoi(num);
+	  push->n = i;
 	if (*stack == NULL)
 	{
 		(*stack) = push;
 		(*stack)->next = NULL;
-		return;
+		(*stack)->prev = NULL;
 	}
 	else
 	{
@@ -85,6 +89,7 @@ void sub(stack_t **stack, unsigned int line_number)
 	temp->n = temp->n - val;
 	free(temp->prev);
 	temp->prev = NULL;
+	*stack = temp;
 }
 /**
 * _div - opcode function
@@ -117,6 +122,7 @@ void _div(stack_t **stack, unsigned int line_number)
 	temp->n = val / temp->n;
 	free(temp->prev);
 	temp->prev = NULL;
+	*stack = temp;
 }
 /**
 * mul - function
@@ -143,4 +149,5 @@ void mul(stack_t **stack, unsigned int line_number)
 	temp->n = val * temp->n;
 	free(temp->prev);
 	temp->prev = NULL;
+	*stack = temp;
 }
