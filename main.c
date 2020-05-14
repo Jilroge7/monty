@@ -1,5 +1,4 @@
 #include "monty.h"
-unsigned int line_number = 0;
 char *num = NULL;
 /**
 * main - main function of monty interpreter
@@ -14,7 +13,7 @@ int main(int argc, char *argv[])
 	FILE *rmonty;
 	char *c;
 	char buff[1024];
-
+	unsigned int line_number = 0;
 	stack_t **stack = malloc(sizeof(stack_t));
 
 	if (stack == NULL)

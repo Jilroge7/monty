@@ -41,7 +41,6 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	int i;
 	stack_t *push = malloc(sizeof(stack_t));
-
 	if (push == NULL)
 		exit(EXIT_FAILURE);
 	i = atoi(num);
@@ -50,6 +49,7 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	{
 		(*stack) = push;
 		(*stack)->next = NULL;
+		(*stack)->prev = NULL;
 		return;
 	}
 	else

@@ -7,7 +7,6 @@
 
 /* GLOBAL VARIABLES */
 
-extern unsigned int line_number; /* line count of monty file */
 extern char *num; /* second argument for opcodes that require it */
 
 /* DATA STRUCTURES */
@@ -55,5 +54,7 @@ void mul(stack_t **stack, unsigned int line_number);
 void _div(stack_t **stack, unsigned int line_number);
 void parse(char *c, stack_t **stack, unsigned int line_number);
 int _strcmp(char *s1, char *s2);
+void freelist(stack_t **stack);
+
 
 #endif /* MONTY_H */
