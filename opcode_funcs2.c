@@ -39,16 +39,21 @@ void add(stack_t **stack, unsigned int line_number)
 * Return: 0 success
 */
 
-void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	int i;
 	stack_t *push = malloc(sizeof(stack_t));
-
 	if (push == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
-	}
+
+	  }
+	if (num == NULL)
+	  {
+	    fprintf(stderr, "L%d: usage: push integer\n", line_number);
+	    exit(EXIT_FAILURE);
+	  }
 	i = atoi(num);
 	push->n = i;
 	if (*stack == NULL)
