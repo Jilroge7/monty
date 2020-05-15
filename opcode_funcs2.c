@@ -54,6 +54,17 @@ void push(stack_t **stack, unsigned int line_number)
 	    fprintf(stderr, "L%d: usage: push integer\n", line_number);
 	    exit(EXIT_FAILURE);
 	  }
+	/*if (num[0] == "-")*/
+
+	for (i = 0; num[i] != '\0'; i++)
+	{
+		printf("%d: i\n", i);
+		if (_isdigit(num[i]) == 1)
+		{
+			fprintf(stderr,"L%d: usage: push integer\n", line_number);
+                	exit(EXIT_FAILURE);
+		}
+	} 
 	i = atoi(num);
 	push->n = i;
 	if (*stack == NULL)
