@@ -45,16 +45,14 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *push = malloc(sizeof(stack_t));
 
 	if (push == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed");
-		exit(EXIT_FAILURE);
-
-	}
+	{fprintf(stderr, "Error: malloc failed");
+		freelist(stack);
+		exit(EXIT_FAILURE); }
 	if (num == NULL)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
+	{fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free(push);
+		freelist(stack);
+		exit(EXIT_FAILURE); }
 	for (i = 0; num[i] != '\0'; i++)
 	{
 		if (num[i] == '\n')
@@ -64,6 +62,8 @@ void push(stack_t **stack, unsigned int line_number)
 	{
 		if (isdigit(num[i]) == 0)
 		{fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			free(push);
+			freelist(stack);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -101,7 +101,7 @@ void sub(stack_t **stack, unsigned int line_number)
 	if (temp->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
-		free(*stack);
+		freelist(stack);
 		exit(EXIT_FAILURE);
 	}
 	val = temp->n;
@@ -130,12 +130,14 @@ void _div(stack_t **stack, unsigned int line_number)
 	if (temp->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+		freelist(stack);
 		exit(EXIT_FAILURE);
 	}
 	val = temp->n;
 	if (val == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_number);
+		freelist(stack);
 		exit(EXIT_FAILURE);
 	}
 	temp = temp->next;
@@ -162,6 +164,7 @@ void mul(stack_t **stack, unsigned int line_number)
 	if (temp->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+		freelist(stack);
 		exit(EXIT_FAILURE);
 	}
 	val = temp->n;
