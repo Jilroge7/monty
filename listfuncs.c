@@ -18,7 +18,7 @@ void freelist(stack_t **stack)
 		free(*stack);
 		*stack = tmp;
 	}
-	free(*stack);
+	free(stack);
 }
 
 /**
