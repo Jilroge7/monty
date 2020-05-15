@@ -55,6 +55,18 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	for (i = 0; num[i] != '\0'; i++)
+	{
+		if (num[i] == '\n')
+			num[i] = '\0';
+	}
+	for (i = 0; num[i] != '\0'; i++)
+	{
+		if (isdigit(num[i]) == 0)
+		{fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	}
 	i = atoi(num);
 	push->n = i;
 	if (*stack == NULL)
