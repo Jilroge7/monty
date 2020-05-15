@@ -19,3 +19,17 @@ void freelist(stack_t **stack)
   free(*stack);
 }
 
+int whitespace_check(char *str)
+{
+  int c, d;
+  for (c = 0; str[c]; c++)
+    {
+      if (isspace(str[c]) == 0)
+	{
+	  d = -1;
+	  return (d);
+	}
+    }
+  d = 0;
+  return (d);
+}
