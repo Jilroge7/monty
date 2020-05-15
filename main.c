@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	FILE *rmonty;
 	char *c;
 	char buff[1024];
-	unsigned int line_number = 0;
+	unsigned int line_number = 1;
 	stack_t **stack = malloc(sizeof(stack_t *));
 	if (stack == NULL)
 	{
@@ -46,8 +46,9 @@ int main(int argc, char *argv[])
 		  {
 			break;
 		  }
+		if (whitespace_check(c) != 0)
+		  parse(c, stack, line_number);
 		line_number++;
-		parse(c, stack, line_number);
 	}
 	freelist(stack);
 	fclose(rmonty);
