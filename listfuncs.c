@@ -34,7 +34,7 @@ int whitespace_check(char *str)
     }
   d = 0;
   return (d);
-
+}
 /**
 * mod - opcode function
 * @stack: stack given to subtract
