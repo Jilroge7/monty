@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
 		c = fgets(buff, 255, (FILE *)rmonty);
 		if (c == NULL)
 			break;
-		  }
 		if (whitespace_check(c) != 0)
 		  parse(c, stack, line_number);
 		line_number++;
