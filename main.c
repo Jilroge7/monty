@@ -16,8 +16,7 @@ int main(int argc, char *argv[])
 	stack_t **stack = malloc(sizeof(stack_t *));
 
 	if (stack == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
+	{fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	if (argc < 2 || argc > 2)
@@ -45,7 +44,7 @@ int main(int argc, char *argv[])
 		if (c == NULL)
 			break;
 		if (whitespace_check(c) != 0)
-		  parse(c, stack, line_number);
+			parse(c, stack, line_number);
 		line_number++;
 	}
 	freelist(stack);
