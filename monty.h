@@ -57,7 +57,6 @@ void mod(stack_t **stack, unsigned int line_number);
 void comments(stack_t **stack, unsigned int line_number);
 int _isdigit(char c);
 void parse(char *c, stack_t **stack, unsigned int line_number);
-int _strcmp(char *s1, char *s2);
 void freelist(stack_t **stack);
 int whitespace_check(char *str);
 

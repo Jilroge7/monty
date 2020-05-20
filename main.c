@@ -14,28 +14,28 @@ int main(int argc, char *argv[])
 	char *c, buff[1024];
 	unsigned int line_number = 1;
 	stack_t **stack = malloc(sizeof(stack_t *));
+	*stack = NULL;
 
 	if (stack == NULL)
 	{fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (argc < 2 || argc > 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		free(*stack);
+	if (argc != 2)
+	{fprintf(stderr, "USAGE: monty file\n");
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	if (access(argv[1], R_OK) == -1)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		free(*stack);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	rmonty = fopen(argv[1], "r");
 	if (rmonty == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free(*stack);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
@@ -83,11 +83,17 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
 		{"#", comments},
 		{"NULL", NULL}
 	};
+	for (i = 0; c[i] != '\0'; i++)
+	  {
+	    if (c[i] == '\n')
+	      c[i] = '\0';
+	  }
+	
 	tokens = strtok(c, delim);
 	num = strtok(NULL, delim);
 	for (i = 0; i < 13; i++)
 	{
-		if (_strcmp(code[i].opcode, tokens) == 0)
+		if (strcmp(code[i].opcode, tokens) == 0)
 		{
 			code[i].f(stack, line_number);
 			return;
@@ -99,25 +105,3 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
 	exit(EXIT_FAILURE);
 }
 
-/**
-* _strcmp - function
-* @s1: string to compare to
-* @s2: string to compare
-*
-* Description: function to compare two strings
-* Return: negative, zero, or positive depending on compare
-*/
-int _strcmp(char *s1, char *s2)
-{
-	int c, r = 0;
-
-	for (c = 0; s1[c] != '\0' && s2[c] != '\0'; c++)
-	{
-		if (s1[c] != s2[c])
-		{
-			r = (s1[c] - s2[c]);
-			return (r);
-		}
-	}
-	return (r);
-}

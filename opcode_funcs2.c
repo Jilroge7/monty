@@ -48,16 +48,11 @@ void push(stack_t **stack, unsigned int line_number)
 	{fprintf(stderr, "Error: malloc failed");
 		freelist(stack);
 		exit(EXIT_FAILURE); }
-	if (num == NULL)
+	if (num == NULL || isspace(num[0]) != 0)
 	{fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(push);
 		freelist(stack);
 		exit(EXIT_FAILURE); }
-	for (i = 0; num[i] != '\0'; i++)
-	{
-		if (num[i] == '\n')
-			num[i] = '\0';
-	}
 	for (i = 0; num[i] != '\0'; i++)
 	{
 		if (isdigit(num[i]) == 0)
@@ -80,6 +75,7 @@ void push(stack_t **stack, unsigned int line_number)
 		(*stack)->prev = push;
 		push->next = (*stack);
 		(*stack) = push;
+		push->prev = NULL;
 	}
 }
 /**
