@@ -84,11 +84,11 @@ void parse(char *c, stack_t **stack, unsigned int line_number)
 		{"NULL", NULL}
 	};
 	for (i = 0; c[i] != '\0'; i++)
-	  {
-	    if (c[i] == '\n')
-	      c[i] = '\0';
-	  }
-	
+	{
+		if (c[i] == '\n')
+		c[i] = '\0';
+	}
+
 	tokens = strtok(c, delim);
 	num = strtok(NULL, delim);
 	for (i = 0; i < 13; i++)
