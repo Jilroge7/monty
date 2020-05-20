@@ -20,9 +20,8 @@ int main(int argc, char *argv[])
 	{fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (argc < 2 || argc > 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
+	if (argc != 2)
+	{fprintf(stderr, "USAGE: monty file\n");
 		free(stack);
 		exit(EXIT_FAILURE);
 	}
